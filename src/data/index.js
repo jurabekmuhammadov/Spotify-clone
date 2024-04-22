@@ -1,0 +1,9 @@
+export const TOKEN = "https://accounts.spotify.com/api/token";
+export const CLIENT_ID = "88ad991c7eac441a8f46785cd9b07e5b";
+export const CLIENT_SECRET = "8ba49e34ffaa48d1ad2b647491a14cf0";
+export const FEATURED_PLAYLIST = "https://api.spotify.com/v1/browse/featured-playlists";
+export const TOP_MIXES = "https://api.spotify.com/v1/browse/categories/toplists/playlists";
+export const MADE_FOR_YOU = "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFHOzuVTgTizF/playlists";
+export const RECENTLY_PLAYED = "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFQ00XGBls6ym/playlists";
+export const JUMP_BACK_IN = "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFLVaM30PMBm4/playlists";
+export const UNIQUELY_YOURS = "https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFCbimwdOYlsl/playlists";
