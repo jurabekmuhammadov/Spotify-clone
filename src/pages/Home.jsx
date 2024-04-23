@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <main className={`m-2  ${isLeftSidebarOpen ? "w-4/6 ml-80 mx-auto" : "w-5/6 ml-28 mx-auto"} ${isRightSidebarOpen ? "w-4/6 mr-80 mx-auto" : "w-5/6 mr-28 mx-auto"} ${!isLeftSidebarOpen && !isRightSidebarOpen ? "w-11/12" : ""}`}>
+      <main className={`m-2 bg-zinc-950 ${isLeftSidebarOpen ? "w-4/6 ml-80 mx-auto" : "w-5/6 ml-28 mx-auto"} ${isRightSidebarOpen ? "w-4/6 mr-80 mx-auto" : "w-5/6 mr-28 mx-auto"} ${!isLeftSidebarOpen && !isRightSidebarOpen ? "w-11/12" : ""}`}>
         <Header />
         <div className="playlists flex flex-col gap-14">
           <div className="top-mixes flex flex-col gap-4 px-5">
@@ -98,7 +98,6 @@ const Home = () => {
           </div>
         </div>
       </main>
-
       <RightSidebar />
     </div>
   )

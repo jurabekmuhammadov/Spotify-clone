@@ -38,7 +38,7 @@ const App = () => {
       <Provider store={store}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
+          {/* <Route path="/search" element={<Search />} /> */}
           <Route path="/liked-songs" element={<LikedSongs />} />
           <Route path="/library" element={<Library />} />
           <Route path="/news" element={<News />} />
