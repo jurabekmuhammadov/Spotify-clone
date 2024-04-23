@@ -38,7 +38,7 @@ const LikedSongs = () => {
     <div className="flex flex-col gap-3">
       <div className="flex">
         <Sidebar />
-        <main className={`m-2 bg-zinc-950 ${isLeftSidebarOpen ? "w-4/6 ml-80 mx-auto" : "w-5/6 ml-28 mx-auto"} ${isRightSidebarOpen ? "w-4/6 mr-80 mx-auto" : "w-5/6 mr-28 mx-auto"} ${!isLeftSidebarOpen && !isRightSidebarOpen ? "w-11/12" : ""}`}>
+        <main className={`m-2 bg-zinc-950 mb-20 ${isLeftSidebarOpen ? "w-4/6 ml-80 mx-auto" : "w-5/6 ml-28 mx-auto"} ${isRightSidebarOpen ? "w-4/6 mr-80 mx-auto" : "w-5/6 mr-28 mx-auto"} ${!isLeftSidebarOpen && !isRightSidebarOpen ? "w-11/12" : ""}`}>
           <header className="text-white py-3 bg-gradient-to-b from-indigo-800 pt-3 px-5 pb-20 rounded-md">
             <div className="top flex justify-between">
               <div className="left flex items-center gap-3">
@@ -150,8 +150,17 @@ const LikedSongs = () => {
                   </div>
                 </div>
                 <span className="text-zinc-500">{item.album.name}</span>
-                <div className="actions">
-                  <button onClick={() => removeFromLikedSongsHandler(item.id)} className="text-white p-3 bg-slate-600 mx-2">Unlike</button>
+                <div className="actions flex items-center gap-2"><button onClick={() => removeFromLikedSongsHandler(item.id)} className="text-white"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clipPath="url(#clip0_3494_1070)">
+                    <path d="M14.0009 6.03963C16.4673 3.74352 20.2787 3.81973 22.6548 6.28786C25.0299 8.75708 25.1118 12.6895 22.9026 15.2546L13.9988 24.5L5.09703 15.2546C2.88787 12.6895 2.97082 8.75055 5.34482 6.28786C7.72303 3.823 11.5271 3.74025 14.0009 6.03963Z" fill="#63CF6C" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_3494_1070">
+                      <rect width="28" height="28" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+                </button>
                   <span>{formatDuration(item.duration_ms)}</span>
                 </div>
               </div>

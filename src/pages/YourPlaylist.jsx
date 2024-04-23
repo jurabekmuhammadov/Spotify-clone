@@ -45,7 +45,7 @@ const YourPlaylist = () => {
 
             <div className="flex">
                 <Sidebar />
-                <main className={`m-2 bg-zinc-950 ${isLeftSidebarOpen ? "w-4/6 ml-80 mx-auto" : "w-5/6 ml-28 mx-auto"} ${isRightSidebarOpen ? "w-4/6 mr-80 mx-auto" : "w-5/6 mr-28 mx-auto"} ${!isLeftSidebarOpen && !isRightSidebarOpen ? "w-11/12" : ""}`}>
+                <main className={`m-2 bg-zinc-950 mb-20 ${isLeftSidebarOpen ? "w-4/6 ml-80 mx-auto" : "w-5/6 ml-28 mx-auto"} ${isRightSidebarOpen ? "w-4/6 mr-80 mx-auto" : "w-5/6 mr-28 mx-auto"} ${!isLeftSidebarOpen && !isRightSidebarOpen ? "w-11/12" : ""}`}>
 
                     <header className="text-white py-3 bg-gradient-to-b from-indigo-800 pt-3 px-5 pb-20 rounded-md">
                         <div className="top flex justify-between">
@@ -158,8 +158,8 @@ const YourPlaylist = () => {
                                     </div>
                                 </div>
                                 <span className="text-zinc-500">{item.album.name}</span>
-                                <div className="actions">
-                                    <button onClick={() => removeFromPlaylistHandler(item.id)} className="text-white p-3 bg-slate-600 mx-2">Unlike</button>
+                                <div className="actions flex items-center gap-2">
+                                    <button onClick={() => removeFromPlaylistHandler(item.id)} className="text-white p-2 rounded-md bg-slate-600 mx-2">Unlike</button>
                                     <span>{formatDuration(item.duration_ms)}</span>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@ const YourPlaylist = () => {
                     </div>
                 </main>
                 <RightSidebar />
-                <audio controls autoPlay className={`${activeSong ? "fixed w-full bg-red-500 bottom-0" : "hidden"}`}>
+                <audio controls autoPlay className={`fixed w-full bg-red-500 bottom-0 ${activeSong ? "fixed w-full bg-red-500 bottom-0" : "fixed w-full bg-red-500 bottom-0"}`}>
                     <source src="" type="audio/mpeg" />
                     {activeSong && <source src={activeSong} type="audio/mpeg" />}
                 </audio>

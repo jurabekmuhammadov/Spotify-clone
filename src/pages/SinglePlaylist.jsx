@@ -61,10 +61,9 @@ const SinglePlaylist = () => {
 
 
   return (
-    <div className="flex">
+    <div className="flex justify-center">
       <Sidebar />
-      <main className={`m-2 bg-zinc-950 ${isLeftSidebarOpen ? "w-4/6 ml-80 mx-auto" : "w-5/6 ml-28 mx-auto"} ${isRightSidebarOpen ? "w-4/6 mr-80 mx-auto" : "w-5/6 mr-28 mx-auto"} ${!isLeftSidebarOpen && !isRightSidebarOpen ? "w-11/12" : ""}`}>
-
+      <main className={`m-2 bg-zinc-950 mb-20 ${isLeftSidebarOpen ? "w-4/6 ml-80 mx-auto" : "w-5/6 ml-28 mx-auto"} ${isRightSidebarOpen ? "w-4/6 mr-80 mx-auto" : "w-5/6 mr-28 mx-auto"} ${!isLeftSidebarOpen && !isRightSidebarOpen ? "w-11/12" : ""}`}>
         <header className="text-white py-3 bg-gradient-to-b from-indigo-800 pt-3 px-5 pb-20 rounded-md">
           <div className="top flex justify-between">
             <div className="left flex items-center gap-3">
@@ -125,9 +124,9 @@ const SinglePlaylist = () => {
 
             </button>
             {isPlaylistInLibrary ? (
-              <button onClick={() => removeFromLibraryHandler(playlistInfo.id)} className="text-white p-3 bg-slate-600 mx-2">Remove</button>
+              <button onClick={() => removeFromLibraryHandler(playlistInfo.id)} className="text-white p-2 rounded-md bg-slate-600 mx-2">Remove</button>
             ) : (
-              <button onClick={() => addToLibraryHandler(playlistInfo)} className="text-white p-3 bg-slate-600 mx-2">Add to Library</button>
+              <button onClick={() => addToLibraryHandler(playlistInfo)} className="text-white p-2 rounded-md bg-slate-600 mx-2">Add to Library</button>
             )}
             <button>
               <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -174,16 +173,37 @@ const SinglePlaylist = () => {
                 </div>
                 <span className="text-zinc-500">{item.track.album.name}</span>
                 <span className="text-zinc-500">{item.added_at.split("T")[0]}</span>
-                <div className="actions">
+                <div className="actions flex items-center gap-2">
                   {isTrackInLikedSongs ? (
-                    <button onClick={() => removeFromLikedSongsHandler(item.track.id)} className="text-white p-3 bg-slate-600 mx-2">Unlike</button>
+                    <button onClick={() => removeFromLikedSongsHandler(item.track.id)} className="text-white"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clipPath="url(#clip0_3494_1070)">
+                        <path d="M14.0009 6.03963C16.4673 3.74352 20.2787 3.81973 22.6548 6.28786C25.0299 8.75708 25.1118 12.6895 22.9026 15.2546L13.9988 24.5L5.09703 15.2546C2.88787 12.6895 2.97082 8.75055 5.34482 6.28786C7.72303 3.823 11.5271 3.74025 14.0009 6.03963Z" fill="#63CF6C" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_3494_1070">
+                          <rect width="28" height="28" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    </button>
                   ) : (
-                    <button onClick={() => addToLikedSongsHandler(item.track)} className="text-white p-3 bg-slate-600 mx-2">Like</button>
+                    <button onClick={() => addToLikedSongsHandler(item.track)} className="text-white">
+                      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip0_3494_1070)">
+                          <path d="M14.0009 6.03963C16.4673 3.74352 20.2787 3.81973 22.6548 6.28786C25.0299 8.75708 25.1118 12.6895 22.9026 15.2546L13.9988 24.5L5.09703 15.2546C2.88787 12.6895 2.97082 8.75055 5.34482 6.28786C7.72303 3.823 11.5271 3.74025 14.0009 6.03963Z" fill="gray" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_3494_1070">
+                            <rect width="28" height="28" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </button>
                   )}
                   {isTrackInPlaylist ? (
-                    <button onClick={() => removeFromPlaylistHandler(item.track.id)} className="text-white p-3 bg-slate-600 mx-2">Remove from playlist</button>
+                    <button onClick={() => removeFromPlaylistHandler(item.track.id)} className="text-white p-2 bg-slate-600 mx-2 rounded-md">Remove from playlist</button>
                   ) : (
-                    <button onClick={() => addToPlaylistHandler(item.track)} className="text-white p-3 bg-slate-600 mx-2">Add to playlist</button>
+                    <button onClick={() => addToPlaylistHandler(item.track)} className="text-white p-2 bg-slate-600 mx-2 rounded-md">Add to playlist</button>
                   )}
                   <span>{formatDuration(item.track.duration_ms)}</span>
                 </div>
@@ -193,7 +213,7 @@ const SinglePlaylist = () => {
         </div>
       </main>
       <RightSidebar />
-      <audio controls autoPlay className={`${activeSong ? "fixed w-full bg-red-500 bottom-0" : "hidden"}`}>
+      <audio controls autoPlay className={`fixed w-full bg-red-500 bottom-0 ${activeSong ? "fixed w-full bg-red-500 bottom-0" : "fixed w-full bg-red-500 bottom-0"}`}>
         <source src="" type="audio/mpeg" />
         {activeSong && <source src={activeSong} type="audio/mpeg" />}
       </audio>

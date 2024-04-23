@@ -140,9 +140,8 @@ const Library = () => {
                   <span className="text-zinc-500 capitalize">{item.name}</span>
                 </div>
               </div>
-              {/* <span className="text-zinc-500">{item.album.name}</span> */}
               <div className="actions">
-                <button onClick={() => removeFromLibraryHandler(item.id)} className="text-white p-3 bg-slate-600 mx-2">Remove</button>
+                <button onClick={() => removeFromLibraryHandler(item.id)} className="text-white p-2 rounded-md bg-slate-600 mx-2">Remove</button>
               </div>
             </div>
           ))) : (<h1 className="text-white">You don`t have any playlists added to library yet</h1>)}
