@@ -24,6 +24,8 @@ const Library = () => {
     localStorage.setItem("single-playlist", JSON.stringify(item))
     navigate(`/playlist/${id}`);
   }
+
+  console.log(library);
   return (
     <div className="flex">
       <Sidebar />
@@ -128,8 +130,17 @@ const Library = () => {
         </div>
         <div className="px-5 mt-10 flex flex-col gap-4">
           {library.length > 0 ? (library.map((item, i) => (
-            <div key={i} className="text-white flex items-center justify-between cursor-pointer hover:underline" >
-              <span onClick={() => goPlaylist(item, item.id)} className="text-white capitalize">{item.name}</span>
+            <div key={i} className="text-white flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div>
+                  <img src={item.images[0].url} alt="" width={60} height={60} className="rounded-md" />
+                </div>
+                <div className="flex flex-col">
+                  <span onClick={() => goPlaylist(item, item.id)} className="font-semibold capitalize hover:underline cursor-pointer">{item.name}</span>
+                  <span className="text-zinc-500 capitalize">{item.name}</span>
+                </div>
+              </div>
+              {/* <span className="text-zinc-500">{item.album.name}</span> */}
               <div className="actions">
                 <button onClick={() => removeFromLibraryHandler(item.id)} className="text-white p-3 bg-slate-600 mx-2">Remove</button>
               </div>

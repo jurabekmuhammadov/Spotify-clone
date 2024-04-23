@@ -1,6 +1,6 @@
 import useTracks from "../hooks/useTracks";
 import { useDispatch, useSelector } from "react-redux";
-import { addToLibrary, addToLikedSongs, addToPlaylist, removeFromLibrary, removeFromLikedSongs, removeFromPlaylist } from "../app/appSlice";
+import { addToLibrary, addToLikedSongs, addToPlaylist, removeFromLibrary, removeFromLikedSongs, removeFromPlaylist, setActiveSong } from "../app/appSlice";
 import Sidebar from "../components/sidebar";
 import RightSidebar from "../components/right-sidebar";
 import DropDown from "../components/ui/dropdown";
@@ -14,6 +14,7 @@ const SinglePlaylist = () => {
   const library = useSelector(state => state.app.library);
   const likedSongs = useSelector(state => state.app.likedSongs);
   const playlist = useSelector(state => state.app.playlist);
+  const activeSong = useSelector(state => state.app.activeSong);
   const isLeftSidebarOpen = useSelector((state) => state.app.isLeftSidebarOpen);
   const isRightSidebarOpen = useSelector((state) => state.app.isRightSidebarOpen);
 
@@ -43,7 +44,22 @@ const SinglePlaylist = () => {
     dispatch(removeFromPlaylist(trackId));
   };
 
-  console.log(playlistInfo);
+  const setActiveTrack = (trackUri) => {
+    dispatch(setActiveSong(trackUri));
+  }
+
+  function formatDuration(duration_ms) {
+    const duration_s = duration_ms / 1000;
+
+    const minutes = Math.floor(duration_s / 60);
+    const seconds = Math.floor(duration_s % 60);
+
+    const formatted_seconds = seconds.toString().padStart(2, "0");
+
+    return `${minutes}:${formatted_seconds}`;
+  }
+
+  console.log(activeSong);
 
   return (
     <div className="flex">
@@ -88,7 +104,7 @@ const SinglePlaylist = () => {
         </header>
         <div className="top px-5">
           <div className="left flex items-center gap-5">
-            <button className="">
+            <button>
               <svg width="104" height="104" viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_d_131_2989)">
                   <circle cx="52" cy="48" r="36" fill="#65D36E" />
@@ -148,7 +164,17 @@ const SinglePlaylist = () => {
             const isTrackInPlaylist = playlist.some(song => song.id === item.track.id);
             return (
               <div key={i} className="text-white flex items-center justify-between">
-                <span>{item.track.name}</span>
+                <div className="flex items-center gap-3">
+                  <div>
+                    <img src={item.track.album.images[0].url} alt="" width={60} height={60} className="rounded-md" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span onClick={() => setActiveTrack(item.track.preview_url)} className="font-semibold hover:underline cursor-pointer">{item.track.name}</span>
+                    <span className="text-zinc-500">{item.track.artists[0].name}</span>
+                  </div>
+                </div>
+                <span className="text-zinc-500">{item.track.album.name}</span>
+                <span className="text-zinc-500">{item.added_at.split("T")[0]}</span>
                 <div className="actions">
                   {isTrackInLikedSongs ? (
                     <button onClick={() => removeFromLikedSongsHandler(item.track.id)} className="text-white p-3 bg-slate-600 mx-2">Unlike</button>
@@ -160,6 +186,7 @@ const SinglePlaylist = () => {
                   ) : (
                     <button onClick={() => addToPlaylistHandler(item.track)} className="text-white p-3 bg-slate-600 mx-2">Add to playlist</button>
                   )}
+                  <span>{formatDuration(item.track.duration_ms)}</span>
                 </div>
               </div>
             );
@@ -167,6 +194,11 @@ const SinglePlaylist = () => {
         </div>
       </main>
       <RightSidebar />
+      <audio controls autoPlay>
+        {/* <source src={activeSong === null ? undefined : activeSong} type="audio/mpeg" /> */}
+        <source src="" type="audio/mpeg" /> {/* Default placeholder source */}
+        {activeSong && <source src={activeSong} type="audio/mpeg" />}
+      </audio>
     </div>
   );
 };

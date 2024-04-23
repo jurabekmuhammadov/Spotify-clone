@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
-import { removeFromPlaylist } from "../app/appSlice";
+import { removeFromPlaylist, setActiveSong } from "../app/appSlice";
 import Sidebar from "../components/sidebar";
 import RightSidebar from "../components/right-sidebar";
 import DropDown from "../components/ui/dropdown";
@@ -21,6 +21,23 @@ const YourPlaylist = () => {
         dispatch(removeFromPlaylist(trackId));
         navigate("/your-playlist");
     };
+
+    const setActiveTrack = (trackUri) => {
+        dispatch(setActiveSong(trackUri));
+    }
+
+    const formatDuration = (duration_ms) => {
+        const duration_s = duration_ms / 1000;
+
+        const minutes = Math.floor(duration_s / 60);
+        const seconds = Math.floor(duration_s % 60);
+
+        const formatted_seconds = seconds.toString().padStart(2, "0");
+
+        return `${minutes}:${formatted_seconds}`;
+    }
+
+    console.log(playlist);
     return (
         <div className="flex flex-col gap-3">
 
@@ -130,12 +147,22 @@ const YourPlaylist = () => {
                     <div className="px-5 mt-10 flex flex-col gap-4">
                         {playlist.length > 0 ? (playlist.map((item, i) => (
                             <div key={i} className="text-white flex items-center justify-between">
-                                <span className="text-white">{item.name}</span>
+                                <div className="flex items-center gap-3">
+                                    <div>
+                                        <img src={item.album.images[0].url} alt="" width={60} height={60} className="rounded-md" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span onClick={() => setActiveTrack(item.preview_url)} className="font-semibold hover:underline cursor-pointer">{item.name}</span>
+                                        <span className="text-zinc-500">{item.artists[0].name}</span>
+                                    </div>
+                                </div>
+                                <span className="text-zinc-500">{item.album.name}</span>
                                 <div className="actions">
-                                    <button onClick={() => removeFromPlaylistHandler(item.id)} className="text-white p-3 bg-slate-600 mx-2">Remove</button>
+                                    <button onClick={() => removeFromPlaylistHandler(item.id)} className="text-white p-3 bg-slate-600 mx-2">Unlike</button>
+                                    <span>{formatDuration(item.duration_ms)}</span>
                                 </div>
                             </div>
-                        ))) : (<h1 className="text-white">You don`t have any songs added to playlists yet</h1>)}
+                        ))) : (<h1 className="text-white text-2xl mb-2">You don`t have any songs added to playlists yet</h1>)}
                     </div>
                 </main>
                 <RightSidebar />

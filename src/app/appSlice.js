@@ -6,6 +6,7 @@ const initialState = {
     playlist: JSON.parse(localStorage.getItem("playlist")) || [],
     isLeftSidebarOpen: true,
     isRightSidebarOpen: true,
+    activeSong: null,
 };
 
 const appSlice = createSlice({
@@ -42,8 +43,11 @@ const appSlice = createSlice({
         toggleRightSidebar(state) {
             state.isRightSidebarOpen = !state.isRightSidebarOpen;
         },
+        setActiveSong(state, action) {
+            state.activeSong = action.payload;
+        }
     },
 });
 
-export const { addToLibrary, removeFromLibrary, addToLikedSongs, removeFromLikedSongs, addToPlaylist, removeFromPlaylist, toggleLeftSidebar, toggleRightSidebar } = appSlice.actions;
+export const { addToLibrary, removeFromLibrary, addToLikedSongs, removeFromLikedSongs, addToPlaylist, removeFromPlaylist, toggleLeftSidebar, toggleRightSidebar, setActiveSong } = appSlice.actions;
 export const appReducer = appSlice.reducer;
