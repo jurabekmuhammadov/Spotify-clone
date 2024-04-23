@@ -59,7 +59,6 @@ const SinglePlaylist = () => {
     return `${minutes}:${formatted_seconds}`;
   }
 
-  console.log(activeSong);
 
   return (
     <div className="flex">
@@ -194,9 +193,8 @@ const SinglePlaylist = () => {
         </div>
       </main>
       <RightSidebar />
-      <audio controls autoPlay>
-        {/* <source src={activeSong === null ? undefined : activeSong} type="audio/mpeg" /> */}
-        <source src="" type="audio/mpeg" /> {/* Default placeholder source */}
+      <audio controls autoPlay className={`${activeSong ? "fixed w-full bg-red-500 bottom-0" : "hidden"}`}>
+        <source src="" type="audio/mpeg" />
         {activeSong && <source src={activeSong} type="audio/mpeg" />}
       </audio>
     </div>

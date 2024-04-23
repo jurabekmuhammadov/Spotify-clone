@@ -14,6 +14,8 @@ const YourPlaylist = () => {
     const dispatch = useDispatch();
     const isLeftSidebarOpen = useSelector((state) => state.app.isLeftSidebarOpen);
     const isRightSidebarOpen = useSelector((state) => state.app.isRightSidebarOpen);
+    const activeSong = useSelector(state => state.app.activeSong);
+
 
     const playlist = JSON.parse(localStorage.getItem("playlist"));
 
@@ -37,7 +39,6 @@ const YourPlaylist = () => {
         return `${minutes}:${formatted_seconds}`;
     }
 
-    console.log(playlist);
     return (
         <div className="flex flex-col gap-3">
 
@@ -166,6 +167,10 @@ const YourPlaylist = () => {
                     </div>
                 </main>
                 <RightSidebar />
+                <audio controls autoPlay className={`${activeSong ? "fixed w-full bg-red-500 bottom-0" : "hidden"}`}>
+                    <source src="" type="audio/mpeg" />
+                    {activeSong && <source src={activeSong} type="audio/mpeg" />}
+                </audio>
             </div>
         </div>
     )

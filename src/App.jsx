@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
-import Search from "./pages/Search"
 import LikedSongs from "./pages/LikedSongs"
 import News from "./pages/News"
 import Premium from "./pages/Premium"
@@ -29,10 +28,10 @@ const App = () => {
         localStorage.setItem("access_token", JSON.stringify(`${data.token_type} ${data.access_token}`));
       }).catch((error) => console.log(error.meassage))
   }
-
   useEffect(() => {
     getToken()
   }, [])
+
   return (
     <BrowserRouter>
       <Provider store={store}>

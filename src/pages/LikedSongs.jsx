@@ -14,6 +14,7 @@ const LikedSongs = () => {
   const dispatch = useDispatch();
   const isLeftSidebarOpen = useSelector((state) => state.app.isLeftSidebarOpen);
   const isRightSidebarOpen = useSelector((state) => state.app.isRightSidebarOpen);
+  const activeSong = useSelector(state => state.app.activeSong);
 
   const removeFromLikedSongsHandler = (trackId) => {
     dispatch(removeFromLikedSongs(trackId));
@@ -159,6 +160,10 @@ const LikedSongs = () => {
           </div>
         </main>
         <RightSidebar />
+        <audio controls autoPlay className={`${activeSong ? "fixed w-full bg-red-500 bottom-0" : "hidden"}`}>
+          <source src="" type="audio/mpeg" />
+          {activeSong && <source src={activeSong} type="audio/mpeg" />}
+        </audio>
       </div>
     </div>
   )
