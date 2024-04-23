@@ -13,16 +13,15 @@ const Library = () => {
     localStorage.setItem("single-playlist", JSON.stringify(playlist))
     navigate(`/playlist/${id}`);
   }
-  
+
   return (
     <div className="text-white">
       {
-        library.map((item) => (
-          <div key={item.id} className="cursor-pointer">
-            <span onClick={() => goPlaylist(item, item.id)}>{item.description}</span>
-            <button onClick={() => removeFromLibrary(item.id)} className="text-white">Remove</button>
-          </div>
-        ))
+        library.length > 0 ? (library.map((item) =>
+          <div key={item.id} className="bg-red-500 p-2 text-white w-40">
+            {item.name}
+            <button className="bg-green-500 p-2" onClick={() => removeFromLibrary(item.id)}>Remove</button>
+          </div>)) : (<h1 className="text-white">You don`t have any playlists added to library yet</h1>)
       }
     </div>
   )

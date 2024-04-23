@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import Library from "./pages/Library.jsx"
 import store from "./app/store.js"
 import AllPlaylists from "./pages/AllPlaylists.jsx"
+import YourPlaylist from "./pages/YourPlaylist.jsx"
 
 const App = () => {
   const getToken = async () => {
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/playlist/:id" element={<SinglePlaylist />} />
           <Route path="/single-song" element={<SingleSong />} />
           <Route path="/all-playlists" element={<AllPlaylists />} />
+          <Route path="/your-playlist" element={<YourPlaylist />} />
         </Routes>
       </Provider>
     </BrowserRouter>

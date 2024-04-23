@@ -14,11 +14,11 @@ const LikedSongs = () => {
   return (
     <div className="flex flex-col gap-3">
       {
-        likedSongs.map((item) =>
-          <div key={item.id} className="bg-red-500 p-2 text-white w-40">
-            {item.name}
-            <button className="bg-green-500 p-2" onClick={() => removeFromLikedSongsHandler(item.id)}>Unlike</button>
-          </div>)
+        likedSongs.length > 0 ? (likedSongs.map((item) =>
+        <div key={item.id} className="bg-red-500 p-2 text-white w-40">
+          {item.name}
+          <button className="bg-green-500 p-2" onClick={() => removeFromLikedSongsHandler(item.id)}>Unlike</button>
+        </div>)) : (<h1 className="text-white">You don`t have any liked songs yet</h1>)
       }
     </div>
   )
