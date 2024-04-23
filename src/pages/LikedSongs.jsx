@@ -39,7 +39,6 @@ const LikedSongs = () => {
       <div className="flex">
         <Sidebar />
         <main className={`m-2 bg-zinc-950 ${isLeftSidebarOpen ? "w-4/6 ml-80 mx-auto" : "w-5/6 ml-28 mx-auto"} ${isRightSidebarOpen ? "w-4/6 mr-80 mx-auto" : "w-5/6 mr-28 mx-auto"} ${!isLeftSidebarOpen && !isRightSidebarOpen ? "w-11/12" : ""}`}>
-
           <header className="text-white py-3 bg-gradient-to-b from-indigo-800 pt-3 px-5 pb-20 rounded-md">
             <div className="top flex justify-between">
               <div className="left flex items-center gap-3">
@@ -158,12 +157,12 @@ const LikedSongs = () => {
               </div>
             ))) : (<h1 className="text-white text-2xl mb-2">You don`t have any liked songs yet</h1>)}
           </div>
+          <audio controls autoPlay className={`fixed w-full bg-red-500 bottom-0 ${activeSong ? "fixed w-full bg-red-500 bottom-0" : "fixed w-full bg-red-500 bottom-0"}`}>
+            <source src="" type="audio/mpeg" />
+            {activeSong && <source src={activeSong} type="audio/mpeg" />}
+          </audio>
         </main>
         <RightSidebar />
-        <audio controls autoPlay className={`${activeSong ? "fixed w-full bg-red-500 bottom-0" : "hidden"}`}>
-          <source src="" type="audio/mpeg" />
-          {activeSong && <source src={activeSong} type="audio/mpeg" />}
-        </audio>
       </div>
     </div>
   )
